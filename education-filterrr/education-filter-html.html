@@ -1,0 +1,163 @@
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- ADVANTAGES OF THIS HTML RENDERED OVERVIEW PAGE OVER A JAVASCRIPT RENDERED ONE:
+    1. Less calculating when rendering, better performance.
+    2. Content and links can be indexed by search engines, they are in the source code.
+    3. When JavaScript is disabled, filtering doesn't work but at least all the content is available.
+    4. Easier to maintain by non-tech savy editors within a CMS. No maintenance in a JSON file.
+-->
+<noscript>
+    <p>Sorry, these filter options will only work if you have JavaScript enabled</p>
+</noscript>
+<form id="programsform">
+    <select class="programselect" id="topic">
+        <option value="">--select topic--</option>
+        <option value="communicatie">Communicatie</option>
+        <option value="econometrie">Econometrie</option>
+        <option value="geschiedenis">Geschiedenis</option>
+        <option value="magie">Magie</option>
+    </select>
+    <select class="programselect" id="type">
+        <option value="">--select type--</option>
+        <option value="master">Master</option>
+        <option value="premaster">Premaster</option>
+        <option value="rema">Research master</option>
+    </select>
+    <select class="programselect" id="duration">
+        <option value="">--select duration--</option>
+        <option value="1">1 jaar</option>
+        <option value="1.5">1.5 jaar</option>
+        <option value="2">2 jaar</option>
+    </select>
+    <select class="programselect" id="language">
+        <option value="">--select language--</option>
+        <option value="english">English</option>
+        <option value="dutch">Dutch</option>
+    </select>
+    <select class="programselect" id="degree">
+        <option value="">--select degree--</option>
+        <option value="ma">Master of Arts</option>
+        <option value="msc">Master of Science</option>
+        <option value="llm">Master of Laws</option>
+    </select>
+</form>
+
+<div class="program" topic="magie" type="master" duration="1" language="dutch" degree="llm">
+    <h3>Midden-Aardrijkskunde</h3>
+    <p>Beschrijving van Midden-Aardrijkskunde en andere ongemakken</p>
+</div>
+
+<div class="program" topic="communicatie" type="master premaster" duration="2" language="english" degree="msc">
+    <h3>Legologie</h3>
+    <p>Beschrijving van Legologie en andere ongemakken</p>
+</div>
+
+<div class="program" topic="econometrie communicatie" type="master" duration="1.5" language="dutch" degree="msc">
+    <h3>Origami voor gevorderden</h3>
+    <p>Beschrijving van origami en andere ongemakken</p>
+</div>
+
+<div class="program" topic="geschiedenis communicatie" type="master" duration="1" language="english" degree="ma">
+    <h3>Great houses of Westeros</h3>
+    <p>Beschrijving van Westeros en andere ongemakken</p>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+
+        // function which checks if an array contains a match with a given item
+        function checkForMatch(inputArray, itemToMatch) {
+            for (c = 0; c < inputArray.length; c++) {
+                if (inputArray[c] == itemToMatch) {
+                    return true;
+                    break;
+                }
+            };
+        }
+
+        // function to (only) show matches
+        function showMatches() {
+            
+            // grab values from form select fields
+            var topic = $('#topic').val();
+            var type = $('#type').val();
+            var duration = $('#duration').val();
+            var language = $('#language').val();
+            var degree = $('#degree').val();
+
+            var topicAttr, typeAttr, durationAttr, languageAttr, degreeAttr;
+            var matchTopic, matchType, matchDuration, matchLanguage, matchDegree;
+            
+            // loop over each of the program items in DOM
+            $('.program').each(function () {
+
+                // set match indicators back to false for new item to check
+                matchTopic = false;
+                matchType = false;
+                matchDuration = false;
+                matchLanguage = false;
+                matchDegree = false;
+
+                // get attribute values
+                topicAttr = $(this).attr('topic');
+                typeAttr = $(this).attr('type');
+                durationAttr = $(this).attr('duration');
+                languageAttr = $(this).attr('language');
+                degreeAttr = $(this).attr('degree');
+                
+                // turn the attr value into an array of subitems if multiple values are allowed
+                topicAttr = topicAttr.split(" ");
+                typeAttr = typeAttr.split(" ");
+                
+                // check for matches on each of the criteria
+                // the arrays of subitems need a separate looping function for that
+                // the single value attributes can use a simple if statement
+                matchTopic = checkForMatch(topicAttr, topic);
+                matchType = checkForMatch(typeAttr, type);
+
+                if (durationAttr == duration) {
+                    matchDuration = true;
+                }
+                if (languageAttr == language) {
+                    matchLanguage = true;
+                }
+                if (degreeAttr == degree) {
+                    matchDegree = true;
+                }
+                
+                // set arrays of (1) matches and (2) form fields
+                var matchedTrue = [matchTopic, matchType, matchDuration, matchLanguage, matchDegree];
+                var formFields = [topic, type, duration, language, degree];
+
+                // check how many criteria matched true
+                var numMatchedTrue = 0;
+                for (y = 0; y < matchedTrue.length; y++) {
+                    if (matchedTrue[y] == true) {
+                        numMatchedTrue++;
+                    }
+                };
+
+                // check how many form fields have been selected (e.g. not contain an empty value)
+                var numFieldsSelected = 0;
+                for (y = 0; y < formFields.length; y++) {
+                    if (formFields[y] != "") {
+                        numFieldsSelected++;
+                    }
+                };
+
+                // display item if the number of fields selected is equal to the number of criteria matched true
+                if (numMatchedTrue == numFieldsSelected) {
+                    $(this).css('display', 'block');
+                } else {
+                    $(this).css('display', 'none')
+                }
+
+            });
+        }
+
+        // catch event when form select fields change and trigger function to (only) show matches
+        $('.programselect').change(function () {
+            showMatches();
+        });
+    });
+</script>

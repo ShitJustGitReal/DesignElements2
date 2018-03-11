@@ -1,0 +1,236 @@
+<main>
+    <div class="quoteWrapper">
+        <button class="nextButton">Next</button>
+        <button class="prevButton invisible-btn">Prev</button>
+        <div class="quote visible">
+            <div class="quoteheader">
+                <h3>Susan, student</h3>
+            </div>
+            <div class="quotecontent">
+                <img src="susan.png" alt="Student Susan">
+                <p>"Voor het vak Marketing heb ik een onderzoek gedaan naar de tevredenheid van provider Vodafone. Dit vond ik erg interessant, omdat het een toepassing van de theorie in de praktijk is."</p>
+                <p><a href="https://www.tilburguniversity.edu/nl/onderwijs/bacheloropleidingen/bedrijfseconomie/review/susan-de-graaf/" target="_blank">Lees het verhaal van Susan</a></p>
+            </div>
+        </div>
+
+        <div class="quote">
+            <div class="quoteheader">
+                <h3>Tim, student</h3>
+            </div>
+            <div class="quotecontent">
+                <img src="tim.png" alt="Student Susan">
+                <p>"Bedrijfseconomie is een brede studie. Van de vier vakgebieden, accounting, financiering, management en marketing, krijg je de eerste twee jaar de basiskennis."</p>
+                <p><a href="https://www.tilburguniversity.edu/nl/onderwijs/bacheloropleidingen/bedrijfseconomie/review/tim-oostveen/" target="_blank">Lees het verhaal van Tim</a></p>
+            </div>
+        </div>
+
+        <div class="quote">
+            <div class="quoteheader">
+                <h3>Patrick, alumnus</h3>
+            </div>
+            <div class="quotecontent">
+                <img src="patrick.png" alt="Student Susan">
+                <p>"In mijn werk maak ik dagelijks gebruik van een aantal vaardigheden die ik aan Tilburg University heb opgedaan, zoals vaktechnische kennis, analytische vaardigheden en een stuk communicatie."</p>
+                <p><a href="https://www.tilburguniversity.edu/nl/onderwijs/bacheloropleidingen/bedrijfseconomie/review/patrick-olde-scholtenhuis/" target="_blank">Lees het verhaal van Patrick</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="quoteWrapper">
+        <button class="nextButton">Next</button>
+        <button class="prevButton invisible-btn">Prev</button>
+        <div class="quote visible">
+            <div class="quoteheader">
+                <h3>Susan, student</h3>
+            </div>
+            <div class="quotecontent">
+                <img src="susan.png" alt="Student Susan">
+                <p>"Voor het vak Marketing heb ik een onderzoek gedaan naar de tevredenheid van provider Vodafone. Dit vond ik erg interessant, omdat het een toepassing van de theorie in de praktijk is."</p>
+                <p><a href="https://www.tilburguniversity.edu/nl/onderwijs/bacheloropleidingen/bedrijfseconomie/review/susan-de-graaf/" target="_blank">Lees het verhaal van Susan</a></p>
+            </div>
+        </div>
+
+        <div class="quote">
+            <div class="quoteheader">
+                <h3>Tim, student</h3>
+            </div>
+            <div class="quotecontent">
+                <img src="tim.png" alt="Student Susan">
+                <p>"Bedrijfseconomie is een brede studie. Van de vier vakgebieden, accounting, financiering, management en marketing, krijg je de eerste twee jaar de basiskennis."</p>
+                <p><a href="https://www.tilburguniversity.edu/nl/onderwijs/bacheloropleidingen/bedrijfseconomie/review/tim-oostveen/" target="_blank">Lees het verhaal van Tim</a></p>
+            </div>
+        </div>
+
+        <div class="quote">
+            <div class="quoteheader">
+                <h3>Patrick, alumnus</h3>
+            </div>
+            <div class="quotecontent">
+                <img src="patrick.png" alt="Student Susan">
+                <p>"In mijn werk maak ik dagelijks gebruik van een aantal vaardigheden die ik aan Tilburg University heb opgedaan, zoals vaktechnische kennis, analytische vaardigheden en een stuk communicatie."</p>
+                <p><a href="https://www.tilburguniversity.edu/nl/onderwijs/bacheloropleidingen/bedrijfseconomie/review/patrick-olde-scholtenhuis/" target="_blank">Lees het verhaal van Patrick</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+    
+    .quoteWrapper {
+        position: relative;
+        border: 1px solid lightgrey;
+        width: 400px;
+        height: auto;
+        margin: 0 auto;
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+    
+    .quote {
+        position: absolute;
+        top: 0;
+        padding: 20px;
+        transform: translate(100%, 0);
+        transition: transform 350ms ease-in-out;
+    }
+    
+    .quote.visible {
+        position: relative;
+        top: auto;
+        display: block;
+        transition: transform 350ms ease-in-out;
+        transform: translateZ(0) translate3D(0, 0, 0);
+    }
+    
+    .nextButton,
+    .prevButton {
+        position: absolute;
+        padding: 15px;
+        color: white;
+        background-color: rgb(0, 142, 198);
+        cursor: pointer;
+        z-index: 1;
+    }
+    
+    .nextButton {
+        top: 50%;
+        right: 1px;
+    }
+    
+    .prevButton {
+        top: 50%;
+        left: 1px;
+    }
+    
+    .invisible-btn{
+        display: none;
+    }
+    
+    .quote img {
+        display: block;
+        margin: 0 auto;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+<script>
+    /* slider, show next and previous quotes */
+    var currentQuote;
+    $('.nextButton').on('click', function () {
+        currentQuote = $(this).siblings('div.visible');
+        showNext(currentQuote);
+    });
+
+    $('.prevButton').on('click', function () {
+        currentQuote = $(this).siblings('div.visible');
+        showPrev(currentQuote);
+    });
+
+    function showNext(quote) {
+        if (quote.is(':last-of-type')) {
+            return false;
+        } else if (quote.is(':nth-last-child(2)')) {
+            quote.siblings('.nextButton').addClass('invisible-btn');
+            quote.toggleClass('visible').next().toggleClass('visible');
+        } else {
+            quote.siblings('.nextButton').removeClass('invisible-btn');
+            quote.toggleClass('visible').next().toggleClass('visible');
+        }
+        quote.siblings('.prevButton').removeClass('invisible-btn');
+    };
+
+    function showPrev(quote) {
+        if (quote.is(':first-of-type')) {
+            return false;
+        } else if (quote.is(':nth-of-type(2)')) {
+            quote.siblings('.prevButton').addClass('invisible-btn');
+            quote.toggleClass('visible').prev().toggleClass('visible');
+        } else {
+            quote.siblings('.prevButton').removeClass('invisible-btn');
+            quote.toggleClass('visible').prev().toggleClass('visible');
+        }
+        quote.siblings('.nextButton').removeClass('invisible-btn');
+    };
+
+
+    // detect swiping
+    var id, wrapper;
+    $('.quoteWrapper').each(function (index) {
+        id = 'wrapper' + index;
+        $(this).attr('id', id);
+        wrapper = document.getElementById(id);
+        wrapper.addEventListener('touchstart', handleTouchStart, false);
+        wrapper.addEventListener('touchmove', handleTouchMove, false);
+        wrapper.addEventListener('touchend', handleTouchEnd, false);
+        wrapper.addEventListener('touchcancel', handleTouchEnd, false);
+    });
+
+    var xDown = null;
+    var yDown = null;
+    var doTouchBreak = null;
+    var minDelta = 200;
+
+    function handleTouchEnd() {
+        doTouchBreak = null;
+    };
+
+    function handleTouchStart(evt) {
+        xDown = evt.touches[0].clientX;
+        yDown = evt.touches[0].clientY;
+    };
+
+    function handleTouchMove(evt) {
+        if (!xDown || !yDown || doTouchBreak) {
+            return;
+        }
+
+        var xUp = evt.touches[0].clientX;
+        var yUp = evt.touches[0].clientY;
+
+        var xDiff = xDown - xUp;
+        var yDiff = yDown - yUp;
+
+        // horizontal swipe
+        if (Math.abs(xDiff) > Math.abs(yDiff)) {
+            if (xDiff > minDelta) {
+                /* left swipe */
+                currentQuote = $(this).find('div.visible');
+                showNext(currentQuote);
+                doTouchBreak = true;
+            } else if (xDiff < -minDelta) {
+                /* right swipe */
+                currentQuote = $(this).find('div.visible');
+                showPrev(currentQuote);
+                doTouchBreak = true;
+            }
+        }
+
+        if (doTouchBreak) {
+            xDown = null;
+            yDown = null;
+        }
+    };
+</script>

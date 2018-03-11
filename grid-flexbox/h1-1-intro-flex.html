@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Title of the document</title>
+    <meta name="author" content="Obi-Bram Kenobi">
+    <meta name="description" content="Practicing flexbox and grid layout">
+    <meta name="keywords" content="flexbox, grid layout">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+    <style>
+        /* give it a little typograhic style, padding/margin and color */
+        
+        body {
+            color: black;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+        }
+        
+        h1,
+        h2,
+        h3 {
+            font-family: 'Lato', sans-serif;
+        }
+        
+        header,
+        nav,
+        main,
+        aside,
+        footer,
+        section {
+            padding: 1rem 2rem;
+            border: 1px dotted gray;
+            margin: 0;
+        }
+        
+        header {
+            background-color: #68020c;
+            color: white;
+            text-align: center;
+        }
+        
+        nav {
+            background-color: #1a3154;
+            color: white;
+        }
+        
+        aside,
+        footer {
+            background-color: #d0d7e0;
+        }
+        
+        footer {
+            margin-top: 1rem;
+        }
+        
+        .menusection {
+            border-bottom: 1px dotted white;
+            padding-bottom: 1rem;
+        }
+        .search {
+            display: inline-block;
+            float: right;
+        }
+        
+        /* don't let the width go too crazy */
+        
+        #page {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* layout flexbox code */
+        
+        #content {
+            display: flex;
+        }
+        
+        nav {
+            flex: 18%;
+        }
+        
+        main {
+            flex: 55%;
+        }
+        
+        aside {
+            flex: 27%;
+        }
+        
+        footer {
+            display: flex;
+        }
+        section {
+            flex: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page">
+        <header>
+            <h2>CSS flexbox layout</h2>
+        </header>
+        <div id="content">
+            <nav>
+                <p class="menusection">Taal&#9660; <span class="search">Zoeken &#9660;</span></p>
+                <p class="menusection">Flexbox layout > Intro</p>
+                <h3>Hello flexbox layout</h3>
+                <ul>
+                    <li>Flexbox 1</li>
+                    <li>Flexbox 2</li>
+                    <li>Flexbox 3</li>
+                    <li>Flexbox 4</li>
+                </ul>
+            </nav>
+            <main>
+                <h1>Hello flexbox layout</h1>
+                <p>Een pagina over het nut en gebruik van lorum ipsum in Nederland en Vlaanderen.</p>
+                <h2>Wat is Lorem Ipsum?</h2>
+                <p>Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet alleen vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letraset vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing software zoals Aldus PageMaker die versies van Lorem Ipsum bevatten.</p>
+                <h2>Waarom gebruiken we het?</h2>
+                <p>Waarom gebruiken we het? Het is al geruime tijd een bekend gegeven dat een lezer, tijdens het bekijken van de layout van een pagina, afgeleid wordt door de tekstuele inhoud. Het belangrijke punt van het gebruik van Lorem Ipsum is dat het uit een min of meer normale verdeling van letters bestaat, in tegenstelling tot "Hier uw tekst, hier uw tekst" wat het tot min of meer leesbaar nederlands maakt. Veel desktop publishing pakketten en web pagina editors gebruiken tegenwoordig Lorem Ipsum als hun standaard model tekst, en een zoekopdracht naar "lorem ipsum" ontsluit veel websites die nog in aanbouw zijn. Verscheidene versies hebben zich ontwikkeld in de loop van de jaren, soms per ongeluk soms expres (ingevoegde humor en dergelijke).</p>
+            </main>
+            <aside>
+                <h3>Gerelateerde informatie</h3>
+                <p>
+                    Een rechterkolom van de buitencategorie met gerelateerde informatie die voor de lezer mogelijk relevant kan zijn, maar niet tot de main content van de pagina behoort.
+                </p>
+            </aside>
+        </div>
+        <footer>
+            <section>
+                <h4>Flexbox layout</h4>
+                <ul>
+                    <li>Flexbox 1</li>
+                    <li>Flexbox 2</li>
+                    <li>Flexbox 3</li>
+                    <li>Flexbox 4</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Grid layout</h4>
+                <ul>
+                    <li>Grid layout 1</li>
+                    <li>Grid layout 2</li>
+                    <li>Grid layout 3</li>
+                    <li>Grid layout 4</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Voorkennis</h4>
+                <ul>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>JavaScript</li>
+                    <li>jQuery</li>
+                </ul>
+            </section>
+            <section>
+                <h4>Copyright</h4>
+                <p>&copy; Obi-Bram Kenobi, 2017</p>
+            </section>
+        </footer>
+    </div>
+
+</body>
+
+</html>

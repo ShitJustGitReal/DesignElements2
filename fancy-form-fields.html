@@ -1,0 +1,323 @@
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lato:900|Open+Sans" rel="stylesheet">
+</head>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous">
+</script>
+<!-- https://select2.github.io/ -->
+<script>
+    $(document).ready(function () {
+
+        /* Geef de parents van textvelden een extra class, als ze geselecteerd worden (focus) */
+        $("input[type=text], textarea").on('focus blur', function (e) {
+            $(this).prev('label').toggleClass('focus', (e.type === 'focus' || this.value.length > 0))
+        }).trigger('blur');
+
+    });
+</script>
+<style>
+    html {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 16px;
+    }
+    
+    h1, h2, h3{
+        font-family: 'Lato', sans-serif;
+    }
+    
+    main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    @media screen and (min-width: 840px) {
+        .wrapper {
+            flex-direction: row;
+        }
+        .intro {
+            flex: 45%;
+        }
+        .options {
+            flex: 55%;
+        }
+    }
+    
+    .intro p {
+        margin: 0.8rem 0.5rem 0 0;
+    }
+    
+    input[type=text],
+    textarea,
+    select {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+    
+    input:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+    }
+    
+    .textcontainer {
+        display: block;
+        position: relative;
+        margin: 2rem 0 2rem 0;
+    }
+    
+    label.textfield {
+        font-weight: 400;
+        opacity: 0.6;
+        pointer-events: none;
+        position: absolute;
+        top: -0.2rem;
+        transform: translate3d(0, 0, 0) scale(1);
+        transform-origin: left top;
+        transition: 240ms;
+    }
+    
+    label.textfield.focus {
+        opacity: 1;
+        transform: translate3d(0, -20px, 0) scale(0.85);
+    }
+    
+    input[type=text],
+    textarea,
+    select {
+        display: block;
+        border: none;
+        border-bottom: 1px solid #66cc33;
+        height: 2rem;
+    }
+    
+    input[type="checkbox"],
+    input[type="radio"] {
+        display: none;
+    }
+    
+    label.option {
+        position: relative;
+        display: block;
+        margin: 1rem 0 1rem 0;
+    }
+    
+    input[type="checkbox"] + label span,
+    input[type="radio"] + label span {
+        position: relative;
+        display: inline-block;
+        width: 19px;
+        height: 19px;
+        margin: -2px 10px 0 0;
+        vertical-align: middle;
+        border: 1px solid #66cc33;
+        cursor: pointer;
+    }
+    
+    input[type="checkbox"] + label span {
+        border-radius: 10%;
+    }
+    
+    input[type="radio"] + label span {
+        border-radius: 100%;
+    }
+    
+    input[type="checkbox"]:checked + label span:after {
+        position: absolute;
+        content: "\2713";
+        /* vink-icoontje voor checkbox */
+        font-weight: bold;
+        font-size: 21px;
+        margin-top: -6px;
+        margin-left: 1px;
+        color: #66cc33;
+    }
+    
+    input[type="radio"]:checked + label span:after {
+        content: '';
+        border-radius: 100%;
+        height: 13px;
+        width: 13px;
+        background: #66cc33;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+    }
+    
+    .selectbox {
+        position: relative;
+        display: block;
+        margin: 0.6rem 0 1rem 0;
+    }
+    
+    .selectbox .arrow {
+        display: block;
+        background-color: white;
+        width: 1.1rem;
+        height: 1.94rem;
+        text-align: right;
+        position: absolute;
+        right: 0;
+        top: 0;
+        color: #66cc33;
+    }
+    
+    input[type=submit] {
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+        margin: 1rem auto 1rem auto;
+        background: #66cc33;
+        color: white;
+        border: 1px solid #66cc33;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        min-width: 25%;
+        border-radius: 4%;
+        cursor: pointer;
+        /* box-shadow: 6px 3px 6px -3px rgba(0,0,0,0.75); */
+    }
+    
+    input[type=submit]:hover {
+        background: #478f24;
+    }
+</style>
+
+<main>
+    <h1>Form elements</h1>
+    <h2>Radio buttons</h2>
+    <div class="wrapper">
+        <div class="intro">
+            <p>Which of the radio options do you prefer?</p>
+        </div>
+        <div class="options">
+            <input id="radio1" type="radio" name="radiobuttons" value="first option">
+            <label for="radio1" class="option"><span></span>first option</label>
+            <input id="radio2" type="radio" name="radiobuttons" value="second option">
+            <label for="radio2" class="option"><span></span>second option</label>
+            <input id="radio3" type="radio" name="radiobuttons" value="thirth option">
+            <label for="radio3" class="option"><span></span>thirth option</label>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="intro">
+            <p>Which of the radio options do you prefer?</p>
+        </div>
+        <div class="options">
+            <input id="radio1" type="radio" name="radiobuttons" value="first option">
+            <label for="radio1" class="option"><span></span>first option</label>
+            <input id="radio2" type="radio" name="radiobuttons" value="second option">
+            <label for="radio2" class="option"><span></span>second option</label>
+            <input id="radio3" type="radio" name="radiobuttons" value="thirth option">
+            <label for="radio3" class="option"><span></span>thirth option</label>
+        </div>
+    </div>
+
+    <h2>Checkboxes</h2>
+    <div class="wrapper">
+        <div class="intro">
+            <p>Which of these checkbox options would you like to take? Multiple answers are possible</p>
+        </div>
+        <div class="options">
+            <input id="checkbox1" type="checkbox" name="checkboxes" value="first option">
+            <label for="checkbox1" class="option"><span></span>first option</label>
+            <input id="checkbox2" type="checkbox" name="checkboxes" value="second option">
+            <label for="checkbox2" class="option"><span></span>second option</label>
+            <input id="checkbox3" type="checkbox" name="checkboxes" value="thirth option">
+            <label for="checkbox3" class="option"><span></span>thirth option</label>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="intro">
+            <p>Which of these checkbox options would you like to take? Multiple answers are possible</p>
+        </div>
+        <div class="options">
+            <input id="checkbox1" type="checkbox" name="checkboxes" value="first option">
+            <label for="checkbox1" class="option"><span></span>first option</label>
+            <input id="checkbox2" type="checkbox" name="checkboxes" value="second option">
+            <label for="checkbox2" class="option"><span></span>second option</label>
+            <input id="checkbox3" type="checkbox" name="checkboxes" value="thirth option">
+            <label for="checkbox3" class="option"><span></span>thirth option</label>
+        </div>
+    </div>
+
+    <h2>Text fields</h2>
+    <p>Your details</p>
+    <div class="textcontainer">
+        <label for="text1" class="textfield"><span></span>Voornaam</label>
+        <input type="text" id="text1" name="text1">
+    </div>
+    <div class="textcontainer">
+        <label for="text2" class="textfield"><span></span>Achternaam</label>
+        <input type="text" id="text2" name="text2">
+    </div>
+    <div class="textcontainer">
+        <label for="text3" class="textfield"><span></span>Hobby's</label>
+        <input type="text" id="text3" name="text3">
+    </div>
+
+
+    <h2>Text areas</h2>
+    <p>Your stories</p>
+    <div class="textcontainer">
+        <label for="textarea1" class="textfield"><span></span>Een verhaal over textareas</label>
+        <textarea id="textarea1" name="textarea1"></textarea>
+    </div>
+    <div class="textcontainer">
+        <label for="textarea2" class="textfield"><span></span>Nog een verhaal over textareas</label>
+        <textarea id="textarea2" name="textarea2"></textarea>
+    </div>
+    <div class="textcontainer">
+        <label for="textarea3" class="textfield"><span></span>Derde verhaal over textareas</label>
+        <textarea id="textarea3" name="textarea3"></textarea>
+    </div>
+
+    <h2>Dropdowns</h2>
+    <div class="wrapper">
+        <div class="intro">
+            <p>Which option fits your situation the most?</p>
+        </div>
+        <div class="options">
+            <div class="selectbox">
+                <select name="select">
+                    <option id="select1" value="option 1">Select option 1
+                        <hr>
+                    </option>
+                    <option id="select2" value="option 2">Select option 2</option>
+                    <option id="select3" value="option 3">Select option 3</option>
+                    <option id="select4" value="option 4">Select option 4</option>
+                </select>
+                <span class="arrow">&#9660;</span>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="intro">
+            <p>Which option fits your situation the most?</p>
+        </div>
+        <div class="options">
+            <div class="selectbox">
+                <select name="select">
+                    <option id="select1" value="option 1">Select option 1
+                        <hr>
+                    </option>
+                    <option id="select2" value="option 2">Select option 2</option>
+                    <option id="select3" value="option 3">Select option 3</option>
+                    <option id="select4" value="option 4">Select option 4</option>
+                </select>
+                <span class="arrow">&#9660;</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>Send button</h2>
+    <div class="wrapper">
+        <input type="submit" value="Send">
+    </div>
+
+</main>

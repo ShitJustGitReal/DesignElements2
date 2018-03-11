@@ -1,0 +1,85 @@
+<div class="accor">
+    <div class="accorheader">
+        <h3>Title inside the accordeon</h3>
+        <span class="arrowclosed"></span>
+    </div>
+    <div class="accorcontent">
+        <p>Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon.</p>
+    </div>
+</div>
+
+<div class="accor">
+    <div class="accorheader">
+        <h3>Title inside the accordeon</h3>
+        <span class="arrowclosed"></span>
+    </div>
+    <div class="accorcontent">
+        <p>Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon.</p>
+    </div>
+</div>
+
+<div class="accor">
+    <div class="accorheader">
+        <h3>Long long looooong Title inside the accordeon</h3>
+        <span class="arrowclosed"></span>
+    </div>
+    <div class="accorcontent">
+        <p>Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon. Content inside the accordeon.</p>
+    </div>
+</div>
+
+<style>
+    .accor {
+        margin: 20px 15px;
+    }
+    
+    .accorheader {
+        border: 1px solid black;
+        border-bottom: 2px solid black;
+        cursor: pointer;
+        position: relative;
+        padding: 15px 25px 15px 15px;
+        background: white;
+    }
+    
+    .accorheader h3 {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .arrowclosed,
+    .arrowopen {
+        position: absolute;
+        right: 10px;
+        top: 26%;
+    }
+    
+    .arrowclosed::after {
+        content: " \25ba";
+    }
+    
+    .arrowopen::after {
+        content: " \25bc";
+    }
+    
+    .accorcontent {
+        border: 1px solid black;
+        border-top: 0;
+        display: none;
+        padding: 10px 0;
+    }
+    
+    .contentopen {
+        display: block;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+<script>
+    /* accordeon - show and hide content */
+    $('.accorheader').on('click', function () {
+        $(this).find('span').toggleClass('arrowopen arrowclosed');
+        $(this).next('.accorcontent').toggleClass('contentopen');
+    });
+</script>

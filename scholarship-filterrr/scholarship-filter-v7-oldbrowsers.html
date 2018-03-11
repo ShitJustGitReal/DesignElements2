@@ -1,0 +1,176 @@
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<form id="scholarshipform">
+    <select class="ssselect" id="country">
+        <option value="">--select your country--</option>
+    </select>
+    <select class="ssselect" id="program">
+        <option value="">--select program of interest--</option>
+    </select>
+</form>
+<div id="scholarships"></div>
+
+
+<script>
+    //// DATA --> SCHOLARSHIPS
+    /// use a tool to convert Excel/CSV to JSON, like this one http://www.convertcsv.com/csv-to-json.htm or this one https://shancarter.github.io/mr-data-converter/
+    /// remember to get the format and JSON exactly right before you put the data into a production environment!
+    
+    var scholarships = [
+        {
+            name: "Tilburg University scholarships",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/scholarships/tiuscholarships/',
+            countries: ['Netherlands', 'Belgium', 'Antartica', 'Turkey'],
+            programs: ['Data Journalism', 'Business Communication and Digital Media', 'Communication Design', 'Cognitive Science and Artificial Intelligence']
+        },
+        {
+            name: "Hockey scholarship",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/scholarships/tilburg-university-hockey-scholarship/',
+            countries: ['Antartica', 'Turkey'],
+            programs: ['Communication Design', 'Cognitive Science and Artificial Intelligence']
+        },
+        {
+            name: "Holland scholarship",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/scholarships/holland-scholarship/',
+            countries: ['Netherlands', 'Belgium'],
+            programs: ['Data Journalism', 'Business Communication and Digital Media']
+        },
+        {
+            name: "Netherlands Fellowship Program (NFP-masters)",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/scholarships/netherlands-fellowship-program/',
+            countries: ['Netherlands', 'Turkey'],
+            programs: ['Data Journalism', 'Business Communication and Digital Media']
+        }      
+
+    ];
+
+
+    $(document).ready(function () {
+
+        ///// A: FILL THE FORM WITH SELECT OPTIONS
+        
+        // 1. Collect all the countries and programs from the scholarships 
+        var rawCountryItems = [],
+            rawProgramItems = [];
+
+        for (i = 0; i < scholarships.length; i++) {
+
+            var item = scholarships[i]; // get current scholarship
+            
+            for (y = 0; y < item.countries.length; y++) {
+                rawCountryItems.push(item.countries[y]);
+            };
+            
+            for (y = 0; y < item.programs.length; y++) {
+                rawProgramItems.push(item.programs[y]);
+            };
+            
+        };
+        
+        // function to remove duplicate items from an array
+        function filterUnique(inputArray) {
+            var seen = {};
+            var outputArray = [];
+            var j = 0;
+            for (var i = 0; i < inputArray.length; i++) {
+                var arrayItem = inputArray[i];
+                if (seen[arrayItem] !== 1) {
+                    seen[arrayItem] = 1;
+                    outputArray[j++] = arrayItem;
+                }
+            }
+            return outputArray;
+        }
+        
+        // 2. remove duplicates from the raw countries and programs arrays, and sort them alphabetically
+        var countryItems = filterUnique(rawCountryItems).sort();
+        var programItems = filterUnique(rawProgramItems).sort();
+        
+        // function to make select options from the cleaned up arrays
+        function makeOptions(inputArray, targetSelect) {
+            var option, optionHtml;
+            for (i = 0; i < inputArray.length; i++) {
+                option = inputArray[i];
+                optionHtml = '<option value="' + option + '">' + option + '</option>';
+                $(optionHtml).appendTo(targetSelect);
+            }
+        };
+
+        //3. make select options from the cleaned up arrays
+        makeOptions(countryItems, $('#country'));
+        makeOptions(programItems, $('#program'));
+
+
+        ///// B: FILTER AND DISPLAY SCHOLARSHIPS
+
+        // function which checks if an array contains a match with a given item
+        function checkForMatch(inputArray, itemToMatch) {
+            for (c = 0; c < inputArray.length; c++) {
+                if (inputArray[c] == itemToMatch) {
+                    return true;
+                    break;
+                }
+            };
+        }
+
+        // HTML needed in result view of the program
+        var scholarshipDiv = $('#scholarships'); // div on page to show matching items in
+        var startList = '<h3>The following scholarships might apply to your situation:</h3><ul id="scholarshipslist"></ul>'; // message and start list to put matching items in
+        var listItem = '<li><a href="%url%" target="_blank">%name%</a></li>'; // template for each item
+
+        // declare variables that are constantly reused when change event fires
+        var country, program, matches;
+
+        // catch events when form select fields change
+        $('.ssselect').change(function () {
+
+            // grab values from form select fields
+            country = $('#country').val();
+            program = $('#program').val();
+
+            // clear matches array and result div
+            matches = [];
+            scholarshipDiv.html("");
+
+            // only start looping when both select fields have a value with possible matches
+            if (country != '' && program != '') {
+
+                // declare variables that are constantly reused in for loop
+                var item, matchCountry, matchProgram;
+
+                for (i = 0; i < scholarships.length; i++) {
+
+                    // set match indicators back to false for new item to check
+                    matchCountry = false;
+                    matchProgram = false;
+
+                    // get current scholarship
+                    item = scholarships[i];
+
+                    // check for matches on each of both criteria
+                    matchCountry = checkForMatch(item.countries, country);
+                    matchProgram = checkForMatch(item.programs, program);
+
+                    // push item to matches array if there's a match on both criteria
+                    if (matchCountry && matchProgram) {
+                        matches.push(item);
+                    }
+                };
+
+                // append message and start <ul> to result div
+                scholarshipDiv.append(startList);
+
+                // get id of <ul> in DOM
+                var scholarshipsList = $('#scholarshipslist');
+
+                // put each of the matches in a <li> and append these to the <ul>
+                var filledListItem, match;
+                for (i = 0; i < matches.length; i++) {
+                    match = matches[i];
+                    filledListItem = listItem.replace('%url%', match.url).replace('%name%', match.name);
+                    $(filledListItem).appendTo(scholarshipsList);
+                };
+            }
+
+        });
+    });
+</script>

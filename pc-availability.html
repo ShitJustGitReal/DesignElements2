@@ -1,0 +1,186 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>PC Availability</title>
+    <meta name="description" content=">Check to see where computers are available">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <style>
+        .building {
+            border: 1px solid black;
+            float: left;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            box-sizing: border-box;
+            width: calc(100% - 20px);
+            background-color: #036;
+            color: white;
+        }
+        
+        .building > h3 {
+            font-size: 2rem;
+        }
+        
+        .building > .free {
+            font-size: 1.8rem;
+        }
+        
+        .building > .free > span {
+            font-size: 4rem;
+        }
+        
+        p.used {
+            font-size: 1.5rem;
+        }
+        
+        #recheck {
+            box-sizing: border-box;
+            font-size: 1rem;
+            padding: 10px;
+            margin: 10px;
+            width: calc(100% - 20px);
+            border: 1px solid #036;
+            font-weight: 600;
+        }
+        
+        #recheck:hover {
+            cursor: pointer;
+        }
+        
+        @media screen and (min-width: 600px) {
+            .tab {
+                width: calc(50% - 20px);
+            }
+            #recheck {
+                max-width: calc(40% - 20px);
+            }
+        }
+        
+        @media screen and (min-width: 850px) {
+            .des {
+                width: calc(33.3% - 20px);
+            }
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+
+            function checkAvailability() {
+                
+                var buildingDiv = $('#buildings');
+                $(buildingDiv).html("");
+
+                var data = [
+                    {
+                        "building": "D",
+                        "computers": 10,
+                        "used": 1,
+                        "free": 9
+                    },
+                    {
+                        "building": "L",
+                        "computers": 420,
+                        "used": 400,
+                        "free": 20
+                    },
+                    {
+                        "building": "P",
+                        "computers": 83,
+                        "used": 50,
+                        "free": 33
+                    },
+                    {
+                        "building": "M",
+                        "computers": 57,
+                        "used": 50,
+                        "free": 7
+                    },
+                    {
+                        "building": "G",
+                        "computers": 22,
+                        "used": 21,
+                        "free": 1
+                    }
+                ];
+
+                function getData() {
+                    return data;
+                };
+
+                var buildings = getData();
+                var template = ` 
+                    <div class="building tab des">
+                        <h3>Building {{building}}</h3>
+                        <p class="free"><span>{{building.free}}</span>
+                        <br>PC's free</p>
+                        <p class="used">In use: {{building.used}} PC's </p>
+                    </div>`;
+                var building, fillTemplate;
+
+                for (var i = 0; i < buildings.length; i++) {
+                    building = buildings[i];
+                    fillTemplate = template;
+                    fillTemplate = fillTemplate.replace("{{building}}", building.building);
+                    fillTemplate = fillTemplate.replace("{{building.free}}", building.free);
+                    fillTemplate = fillTemplate.replace("{{building.used}}", building.used);
+                    buildingDiv.append(fillTemplate);
+
+                };
+
+                function getTime() {
+                    var timeTemplate = "Computers available {{timestamp}}";
+                    var currentTime = new Date();
+                    var day = currentTime.getDay();
+                    switch (day) {
+                    case 0:
+                        day = "Sunday";
+                        break;
+                    case 1:
+                        day = "Monday";
+                        break;
+                    case 2:
+                        day = "Tuesday";
+                        break;
+                    case 3:
+                        day = "Wednesday";
+                        break;
+                    case 4:
+                        day = "Thursday";
+                        break;
+                    case 5:
+                        day = "Friday";
+                        break;
+                    case 6:
+                        day = "Saturday";
+                    };
+                    currentTime = day + " at " + currentTime.getHours() + ":" + currentTime.getMinutes() + ":" + currentTime.getSeconds();
+                    timeTemplate = timeTemplate.replace("{{timestamp}}", currentTime);
+                    $('#timestamp').text(timeTemplate);
+                };
+                getTime();
+            }
+
+            checkAvailability();
+
+            $('#recheck').on('click', function () {
+                checkAvailability();
+            })
+
+        });
+    </script>
+
+    <h2 id="timestamp">Computers available at...</h2>
+    <button id="recheck">Re-check PC availability</button>
+    <div id="buildings">
+        <p>There's currently no PC availability data available. Please refresh this page to try again.</p>
+    </div>
+
+</body>
+
+</html>

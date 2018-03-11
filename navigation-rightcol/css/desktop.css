@@ -1,0 +1,222 @@
+@media (min-width: 1060px) {
+    /* WRAPPER STYLES */
+    body.no-scroll {
+        overflow: auto;
+    }
+    .wrapper {
+        margin: 9.5rem auto 3rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+    main.width {
+        order: 2;
+        margin-top: 0;
+        position: relative;
+    }
+    .width {
+        max-width: 1200px;
+    }
+    .paddingx {
+        padding-left: 1.7rem;
+        padding-right: 1.7rem;
+    }
+    .bordertop {
+        margin-top: 0.5rem;
+        border-top: 1px solid lightgray;
+    }
+    .rightcol {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+    }
+    .ctabtn.hide-sm {
+        display: block;
+        font-size: 0.9rem;
+    }
+    /* DEFAULT STYLING of elements */
+    h1 {
+        font-size: 2.5rem;
+        line-height: 2.8rem;
+    }
+    h2 {
+        font-size: 1.8rem;
+        line-height: 2.1rem;
+    }
+    h3 {
+        font-size: 1.5rem;
+        line-height: 1.8rem;
+    }
+    /* GRID system total width of 100%*/
+    .col-m-755 {
+        width: 75.5%;
+    }
+    .col-m-70 {
+        width: 70%;
+    }
+    .col-m-685 {
+        width: 68.5%;
+    }
+    .col-m-44 {
+        width: 44%;
+    }
+    .col-m-32 {
+        width: 32%;
+    }
+    .col-m-29 {
+        width: 29%;
+    }
+    .col-m-22 {
+        width: 22%;
+    }
+    /* HEADER */
+    header {
+        position: absolute;
+    }
+    header .paddingx {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #logoimage,
+    #payoff {
+        display: inline-block;
+    }
+    .fixheight {
+        height: 4.8rem;
+    }
+    header li a {
+        text-decoration: none;
+    }
+    header li a:hover {
+        text-decoration: underline;
+    }
+    #channels,
+    #categories {
+        display: block;
+        list-style-type: none;
+    }
+    #channels li,
+    #categories > li {
+        display: inline-block;
+    }
+    #channels {
+        padding: 0.5rem 0 0 0;
+    }
+    #channels a {
+        padding: 0.2rem;
+        color: rgba(102, 77, 25, 1);
+    }
+    .langswitch {
+        display: inline-block;
+        border: 1px solid lightgray;
+    }
+    .langswitch:after {
+        display: inline-block;
+        content: "";
+        width: 2rem;
+        height: 1rem;
+        background: url(../images/english.svg) no-repeat center #fff;
+        background-size: 30px;
+    }
+    #categories {
+        position: relative;
+        margin: 0.4rem 0 0;
+        padding-left: 0;
+    }
+    #categories li {
+        padding: 0;
+    }
+    #categories > li > a {
+        display: block;
+        padding: 0.5rem 0.8rem;
+    }
+    .hiddenlist {
+        height: 0;
+        visibility: hidden;
+        position: absolute;
+        list-style-type: none;
+        width: 20rem;
+        padding: 0.6rem 0.8rem 0 0.8rem;
+        border-bottom: 1px solid gray;
+        opacity: 0;
+        transition: opacity 0.2s ease-in;
+    }
+    .showlist {
+        height: auto;
+        visibility: visible;
+        opacity: 1;
+    }
+    .inactive {
+        background-color: lightgray;
+    }
+    /* MENU */
+    #hamburgermenu.closed {
+        transform: none;
+    }
+    #hamburgermenu {
+        position: relative;
+        top: auto;
+        overflow-y: visible;
+    }
+    #hamburger,
+    #closebtn {
+        display: none;
+    }
+    .mobilenav {
+        display: none;
+    }
+    /* SEARCHBOX */
+    #searchbox.closed {
+        transform: none;
+    }
+    #searchbtn {
+        display: none;
+    }
+    #searchbox {
+        position: relative;
+        top: 0;
+        left: 0;
+        border-bottom: 0;
+    }
+    #searchbox input {
+        font-size: 0.9rem;
+        height: 2.5rem;
+    }
+    /* FOOTERNAV */
+    #footernav {
+        order: 3;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #footernav > h2 {
+        width: 100%;
+        padding-top: 0.2rem;
+    }
+    #footernav .closed {
+        display: block;
+        border-left: 0;
+        border-right: 0;
+    }
+    #footernav .accor {
+        border: 0;
+        margin-right: 2%;
+    }
+    #footernav .accorheader {
+        cursor: auto;
+        border: 0;
+        padding-bottom: 0;
+        background-color: white;
+        text-align: left;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: rgba(0, 88, 122, 1);
+    }
+    #footernav .accor:last-child {
+        margin-right: 0;
+    }
+    #footernav .arrowclosed:after,
+    #footernav .arrowopen:after {
+        content: "";
+    }
+}

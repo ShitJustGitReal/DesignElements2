@@ -1,0 +1,258 @@
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<form id="programsform">
+    <select class="programselect" id="topic">
+        <option value="">--select topic--</option>
+    </select>
+    <select class="programselect" id="type">
+        <option value="">--select type--</option>
+    </select>
+    <select class="programselect" id="duration">
+        <option value="">--select duration--</option>
+    </select>
+    <select class="programselect" id="language">
+        <option value="">--select language--</option>
+    </select>
+    <select class="programselect" id="degree">
+        <option value="">--select degree--</option>
+    </select>
+</form>
+<div id="programs"></div>
+
+
+<script>
+    //// DATA --> programs
+    /// use a tool to convert Excel/CSV to JSON, like this one http://www.convertcsv.com/csv-to-json.htm or this one https://shancarter.github.io/mr-data-converter/
+    /// remember to get the format and JSON exactly right before you put the data into a production environment!
+
+    var programs = [
+        {
+            name: "Midden-Aardrijkskunde",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/midden-aardrijkskunde/',
+            topics: ['communicatie', 'econometrie', 'magie', 'geschiedenis'],
+            duration: '1 year',
+            description: 'Beschrijving van Midden-Aardrijkskunde en andere ongemakken',
+            language: 'Dutch',
+            degree: 'MSc',
+            type: ['master', 'premaster']
+        },
+        {
+            name: "Legologie",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/legologie/',
+            topics: ['econometrie', 'magie', 'geschiedenis'],
+            duration: '1 year',
+            description: 'Beschrijving van Legologie en andere ongemakken',
+            language: 'Bengaals',
+            degree: 'LLM',
+            type: ['master']
+        },
+        {
+            name: "Origami voor gevorderden",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/origami/',
+            topics: ['communicatie', 'econometrie'],
+            duration: '2 years',
+            description: 'Beschrijving van Origami en andere ongemakken',
+            language: 'Prototaal',
+            degree: 'MSc',
+            type: ['master']
+        },
+        {
+            name: "Great houses of Westeros",
+            url: 'https://www.tilburguniversity.edu/education/masters-programmes/westeros/',
+            topics: ['geschiedenis'],
+            duration: '1.5 years',
+            description: 'Beschrijving van Westeros en andere ongemakken',
+            language: 'English',
+            degree: 'MA',
+            type: ['master', 'premaster']
+        }
+
+    ];
+
+
+    $(document).ready(function () {
+
+        ///// A: FILL THE FORM WITH SELECT OPTIONS
+
+        // 1. Collect all the countries and programs from the programs 
+        var rawTopicItems = [],
+            rawTypeItems = [],
+            rawDurationItems = [],
+            rawLanguageItems = [],
+            rawDegreeItems = [];
+
+        for (i = 0; i < programs.length; i++) {
+
+            var item = programs[i]; // get current scholarship
+
+            for (y = 0; y < item.topics.length; y++) {
+                rawTopicItems.push(item.topics[y]);
+            };
+
+            for (y = 0; y < item.type.length; y++) {
+                rawTypeItems.push(item.type[y]);
+            };
+
+            rawDurationItems.push(item.duration);
+            rawLanguageItems.push(item.language);
+            rawDegreeItems.push(item.degree);
+
+        };
+
+        // function to remove duplicate items from an array
+        function filterUnique(inputArray) {
+            var seen = {};
+            var outputArray = [];
+            var j = 0;
+            for (var i = 0; i < inputArray.length; i++) {
+                var arrayItem = inputArray[i];
+                if (seen[arrayItem] !== 1) {
+                    seen[arrayItem] = 1;
+                    outputArray[j++] = arrayItem;
+                }
+            }
+            return outputArray;
+        }
+
+        // 2. remove duplicates from the arrays, and sort them alphabetically
+        var topicItems = filterUnique(rawTopicItems).sort();
+        var typeItems = filterUnique(rawTypeItems).sort();
+        var durationItems = filterUnique(rawDurationItems).sort();
+        var languageItems = filterUnique(rawLanguageItems).sort();
+        var degreeItems = filterUnique(rawDegreeItems).sort();
+
+        // function to make select options from the cleaned up arrays
+        function makeOptions(inputArray, targetSelect) {
+            var option, optionHtml;
+            for (i = 0; i < inputArray.length; i++) {
+                option = inputArray[i];
+                optionHtml = '<option value="' + option + '">' + option + '</option>';
+                $(optionHtml).appendTo(targetSelect);
+            }
+        };
+
+        //3. make select options from the cleaned up arrays
+        makeOptions(topicItems, $('#topic'));
+        makeOptions(typeItems, $('#type'));
+        makeOptions(durationItems, $('#duration'));
+        makeOptions(languageItems, $('#language'));
+        makeOptions(degreeItems, $('#degree'));
+
+        ///// B: FILTER AND DISPLAY programs
+
+        // function which checks if an array contains a match with a given item
+        function checkForMatch(inputArray, itemToMatch) {
+            for (c = 0; c < inputArray.length; c++) {
+                if (inputArray[c] == itemToMatch) {
+                    return true;
+                    break;
+                }
+            };
+        }
+
+        // function to sort matches objects alphabetically on their name property
+        function sortMatches(a, b) {
+            if (a.name < b.name)
+                return -1;
+            if (a.name > b.name)
+                return 1;
+            return 0;
+        }
+
+        // HTML needed in result view of the program
+        var programDiv = $('#programs'); // div on page to show matching items in
+        var startList = '<h3>Matching programs:</h3><ul id="programslist"></ul>'; // message and start list to put matching items in
+        var listItem = '<li><a href="%url%" target="_blank">%name%</a></li>'; // template for each item
+
+        // declare variables that are constantly reused when render function fires
+        var topic, type, duration, language, degree, matches;
+
+        // function to determine and render matches
+        function renderMatches() {
+            // grab values from form select fields
+            topic = $('#topic').val();
+            type = $('#type').val();
+            duration = $('#duration').val();
+            language = $('#language').val();
+            degree = $('#degree').val();
+
+            // clear matches array and result div
+            matches = [];
+            programDiv.html("");
+
+            // declare variables that are constantly reused in for loop
+            var item, matchTopic, matchType, matchDuration, matchLanguage, matchDegree;
+
+            for (i = 0; i < programs.length; i++) {
+
+                // set match indicators back to false for new item to check
+                matchTopic = false;
+                matchType = false;
+                matchDuration = false;
+                matchLanguage = false;
+                matchDegree = false;
+
+                // get current scholarship
+                item = programs[i];
+
+                // check for matches on each the criteria
+                matchTopic = checkForMatch(item.topics, topic);
+                matchType = checkForMatch(item.type, type);
+                if (item.duration == duration) {
+                    matchDuration = true;
+                }
+                if (item.language == language) {
+                    matchLanguage = true;
+                }
+                if (item.degree == degree) {
+                    matchDegree = true;
+                }
+                var matchedTrue = [matchTopic, matchType, matchDuration, matchLanguage, matchDegree];
+                var formFields = [topic, type, duration, language, degree];
+                var numMatchedTrue = 0;
+                var numFieldsSelected = 0;
+
+                for (y = 0; y < matchedTrue.length; y++) {
+                    if (matchedTrue[y] == true) {
+                        numMatchedTrue++;
+                    }
+                };
+
+                for (y = 0; y < formFields.length; y++) {
+                    if (formFields[y] != "") {
+                        numFieldsSelected++;
+                    }
+                };
+
+                // push item to matches array if the number of fields selected is equal to the number of criteria matched true
+                if (numMatchedTrue == numFieldsSelected) {
+                    matches.push(item);
+                }
+            };
+
+            // sort the matches alphabetically on their name property
+            matches = matches.sort(sortMatches);
+
+            // append message and start <ul> to result div
+            programDiv.append(startList);
+
+            // get id of <ul> in DOM
+            var programsList = $('#programslist');
+
+            // put each of the matches in a <li> and append these to the <ul>
+            var filledListItem, match;
+            for (i = 0; i < matches.length; i++) {
+                match = matches[i];
+                filledListItem = listItem.replace('%url%', match.url).replace('%name%', match.name);
+                $(filledListItem).appendTo(programsList);
+            };
+        };
+
+        // fire the render function to display all programs at start
+        renderMatches();
+
+        // catch events when form select fields change
+        $('.programselect').change(function () {
+            renderMatches();
+        });
+    });
+</script>
