@@ -1,0 +1,518 @@
+<!doctype html>
+
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Tilburg University - Projectaanpak redesign masters</title>
+    <meta name="description" content="Contains a schematic overview of the redesign project for the masterwebsites of Tilburg University">
+    <meta name="author" content="Bram Laurijsen and Suzan van Kasteren">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+    <style>
+        body {
+            padding: 0 20px 20px 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: hidden;
+        }
+        
+        .border {
+            border: 1px solid black;
+            position: relative;
+            min-height: 150px;
+        }
+        
+        .arrows-right {
+            font-size: 6rem;
+            font-weight: 900;
+            position: absolute;
+            bottom: 35%;
+            width: 100px;
+            right: -70px;
+            padding: 20px;
+        }
+        
+        .arrows-right:hover, .arrows-right:active{
+            cursor: pointer;
+            font-size: 8rem;
+        }
+        
+        .arrows-down, .arrows-up {
+            clear: both;
+            font-size: 6rem;
+            font-weight: 900;
+            color: #008EC6;
+            position: relative;
+            right: -50%;
+        }
+        
+        .arrows-down:hover, arrows-up:hover {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .sectionheader {
+            text-align: center;
+        }
+        
+        section {
+            display: block;
+            border-top: 2px solid black;
+            clear: both;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        ul,
+        p {
+            margin: 10px 0;
+        }
+        
+        p {
+            padding: 0 10px;
+        }
+        
+        ol.topmenu {
+            font-size: 1.8rem;
+        }
+        ol.topmenu li {
+            min-width: 180px;
+            float: left;
+        }
+        ol.topmenu li a {
+            display: inline-block;
+            width: 100%;
+            vertical-align: text-top;
+        }
+        
+        ul {
+            padding: 0 10px 0 30px;
+        }
+        
+        li {
+            padding-bottom: 10px;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" defer></script>-->
+    <script>
+        $(document).ready(function() {
+            $('.arrows-down').click(
+                function() {
+                    var elem = $(this).parent().next('section').attr('id');
+                    //console.log(elem);
+                    window.location.href = '#' + elem;
+                });
+        });
+
+    </script>
+</head>
+
+<body>
+    <section id="header" class="row">
+        <div class="col-xs-12">
+            <h1>Schema projectaanpak redesign masterwebsites Tilburg University</h1>
+            <p><strong>versie: 1.0 - 3 juni 2016</strong></p>
+            <ol class="topmenu">
+                <li><a href="#onderzoeksfase">Onderzoeksfase</a></li>
+                <li><a href="#designfase">Designfase</a></li>
+                <li><a href="#frontendfase">Front-end fase</a></li>
+                <li><a href="#cmsfase">CMS-fase</a></li>
+                <li><a href="#optimalisatiefase">Optimalisatie- en doorontwikkelfase</a></li>
+            </ol>
+        </div>
+    </section>
+    <section id="onderzoeksfase" class="row">
+        <div class="sectionheader col-xs-12">
+            <h2>Onderzoeksfase</h2></div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Kwantitatief onderzoek</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        <strong>Marktonderzoek</strong> informatie masterkiezers
+                    </li>
+                    <li>
+                        <strong>Belangrijkste informatiebehoefte</strong> masterkiezers
+                    </li>
+                    <li>
+                        Websitebezoek masterkiezers in 2015: <strong>meest en minst bezochte informatie</strong> (Google Analytics/Excel)
+                    </li>
+                    <li>
+                        Belangrijkste (en minst belangrijke) <strong>informatiebronnen</strong> voor masterkiezers
+                    </li>
+                    <li>
+                        Belangrijkste <strong>redenen</strong> voor masterkiezers om voor <strong>Tilburg University</strong> te kiezen
+                    </li>
+                    <li>
+                        Belangrijkste <strong>redenen</strong> voor masterkiezers om voor studeren in het <strong>buitenland of Nederland</strong> te kiezen
+                    </li>
+                    <li>
+                        <strong>Verloop studiekeuzeproces</strong> en overige kenmerken masterkiezers
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Persona's</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Doorstroom eigen wo-bachelor
+                    </li>
+                    <li>
+                        Externe hbo'ers
+                    </li>
+                    <li>
+                        Externe wo-bachelor nationaal
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal EU
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal non-EU
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Interviews en focusgroepen</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Doorstroom eigen wo-bachelor
+                    </li>
+                    <li>
+                        Externe hbo'ers
+                    </li>
+                    <li>
+                        Externe wo-bachelor nationaal
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal EU
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal non-EU
+                    </li>
+                </ul>
+            </div>
+            <p>Wat zijn de grootste overeenkomsten en verschillen tussen jou en de persona's?</p>
+        </div>
+        <p class="arrows-down" title="Click for next phase"><span>&#8650;</span></p>
+    </section>
+    <section id="designfase" class="row">
+        <div class="sectionheader col-xs-12">
+            <h2>Designfase</h2>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Interactiemodel</h3>
+            <div class="border">
+
+                <p><strong>Soorten pagina's</strong></p>
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+                <hr>
+                <p><strong>Elementen op de pagina</strong></p>
+                <ul>
+                    <li>
+                        Vraaggerichte functionaliteit:
+                        <br> teksten, afbeeldingen, video, tools.
+                    </li>
+                    <li>
+                        Conversiegerichte functionaliteit:
+                        <br> soft-conversies | hoofdconversie
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Gebruikerstest</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Doorstroom eigen wo-bachelor
+                    </li>
+                    <li>
+                        Externe hbo'ers
+                    </li>
+                    <li>
+                        Externe wo-bachelor nationaal
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal EU
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal non-EU
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Design</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="arrows-down" title="Click for next phase"><span>&#8650;</span></p>
+    </section>
+    <section id="frontendfase" class="row">
+        <div class="sectionheader col-xs-12">
+            <h2>Front-end fase</h2>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>HTML, CSS, JavaScript</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Gebruikerstest</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Doorstroom eigen wo-bachelor
+                    </li>
+                    <li>
+                        Externe hbo'ers
+                    </li>
+                    <li>
+                        Externe wo-bachelor nationaal
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal EU
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal non-EU
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Performancetest</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="arrows-down" title="Click for next phase"><span>&#8650;</span></p>
+    </section>
+    <section id="cmsfase" class="row">
+        <div class="sectionheader col-xs-12">
+            <h2>CMS-fase</h2>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Templates, presentaties, elementen</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Performancetest</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Gebruikerstest editors</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Functioneel beheer
+                    </li>
+                    <li>
+                        Site managers / webco's
+                    </li>
+                    <li>
+                        Editors advanced
+                    </li>
+                    <li>
+                        Editors
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="arrows-down" title="Click for next phase"><span>&#8650;</span></p>
+    </section>
+    <section id="optimalisatiefase" class="row">
+        <div class="sectionheader col-xs-12">
+            <h2>Optimalisatie- en doorontwikkelfase</h2>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Web Analytics</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Gebruik website: meest en minst bezochte informatie
+                    </li>
+                    <li>
+                        Zoekwoorden / SEO
+                    </li>
+                    <li>
+                        Conversiepaden
+                    </li>
+                    <li>
+                        Heatmaps
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Usability-onderzoek</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Doorstroom eigen wo-bachelor
+                    </li>
+                    <li>
+                        Externe hbo'ers
+                    </li>
+                    <li>
+                        Externe wo-bachelor nationaal
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal EU
+                    </li>
+                    <li>
+                        Externe wo-bachelor internationaal non-EU
+                    </li>
+                </ul>
+                <p class="arrows-right"><span>&#8646;</span></p>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+            <h3>Conversieoptimalisatie: A/B-testen</h3>
+            <div class="border">
+                <ul>
+                    <li>
+                        Overzichtspagina
+                    </li>
+                    <li>
+                        Opleidingspagina
+                    </li>
+                    <li>
+                        Contentpagina
+                    </li>
+                    <li>
+                        Eventpagina
+                    </li>
+                    <li>
+                        Landingspagina(?)
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <p class="arrows-up" title="Back to top"><a href="#header"><span>&#8634;</span></a></p>
+    </section>
+</body>
+
+</html>
